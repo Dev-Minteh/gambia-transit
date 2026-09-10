@@ -108,10 +108,10 @@ return matches;
 const maxPrice = filterByMaxFare(routes, 18);
 console.log(maxPrice);
 
-console.log("===========================max price=================================")
+console.log("===========================maxPrice=================================")
 
 function filterByMaxFare(routes, maxFare){
-let matches = [];
+let matches = []; 
 for(let i = 0; i < routes.length; i++){
   if(routes[i].fare <= maxFare){
     matches.push(routes[i]);
@@ -122,3 +122,47 @@ return matches;
 const maxFarePrice = filterByMaxFare(routes, 18);
 console.log(maxFarePrice);
 
+
+console.log("===========================level 2===================================");
+
+function findRoutesFrom(routes, location){
+  let matches = [];
+for(let i = 0; i < routes.length; i++){
+  if(routes[i].from === location){ 
+    matches.push(routes[i])
+  } 
+}
+return matches
+}
+
+
+const fineRoute = findRoutesFrom(routes, "Brusubi");
+const fineRoute1 = findRoutesFrom(routes, "Serekunda");
+const fineRoute2 = findRoutesFrom(routes, "Westfield");
+console.log(fineRoute);
+console.log(fineRoute1);
+console.log(fineRoute2);
+
+
+console.log("===========================level 2 find path===================================");
+
+function findPath(routes, start, destination){
+  let currentLocation = start;
+  const path = [];
+  while(currentLocation != destination){
+  legs = findRoutesFrom(routes, currentLocation); // find the next possible step
+  if(legs.length === 0){
+    return null;
+  }
+  nextLeg = legs[0]; // pick the first option
+  path.push(nextLeg) // add it to the path
+  currentLocation = nextLeg.to;  // move to the next location
+  }
+  return path;
+}
+
+
+const trip = findPath(routes, "Brusubi", "Banjul");
+console.log(trip);
+const trip1 = findPath(routes, "Brusubi", "Nowhere");
+console.log(trip1);
