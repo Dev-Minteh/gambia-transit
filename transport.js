@@ -166,3 +166,44 @@ const trip = findPath(routes, "Brusubi", "Banjul");
 console.log(trip);
 const trip1 = findPath(routes, "Brusubi", "Nowhere");
 console.log(trip1);
+
+console.log("===========================calculating the total fare===================================");
+
+function calculateFare(trip){
+let total = 0;
+for(let i = 0; i < trip.length; i++){
+  total = total + trip[i].fare;
+}
+return total
+}
+
+const tripFare = findPath(routes, "Brusubi", "Banjul");
+const totalFare = calculateFare(tripFare);
+console.log(totalFare);
+
+
+console.log("===========================calculating traveling time===================================");
+
+function calculateTravelTime(trip){
+let totalTime = 0;
+for(let i = 0; i < trip.length; i++){
+  totalTime = totalTime + trip[i].travelTime;
+}
+return totalTime;
+}
+
+const tripTime = findPath(routes, "Brusubi", "Banjul");
+const calTime = calculateTravelTime(tripTime);
+console.log(calTime);
+
+console.log("===========================calculating transfers===================================");
+
+function calculateTransfers(trip){
+ let transfer = trip.length
+ transfer = transfer - 1;
+ return transfer;
+}
+
+const tripTrans = findPath(routes, "Brusubi", "Banjul");
+const tripCal = calculateTransfers(tripTrans);
+console.log(tripCal);
