@@ -25,6 +25,15 @@ const route3 = {
   travelTime: 45
 };
 
+const routeDirect = {
+  from: "Brusubi",
+  to: "Banjul",
+  vehicle: "car", // or whatever you'd like — your call
+  fare: 100,
+  currency: "GMD",
+  travelTime: 45
+};
+
 console.log(route1);
 console.log(route1.travelTime);
 console.log(route1.to);
@@ -44,7 +53,11 @@ console.log(typeof route3.fare);
 console.log(typeof route3.currency);
 
 console.log("separate routes");
-const routes = [route1, route2, route3];
+
+const routes = [route1, route2, route3, routeDirect];
+
+
+
 console.log(routes);
 console.log(routes[0]);
 console.log(routes.length);
@@ -137,11 +150,11 @@ return matches
 
 
 const fineRoute = findRoutesFrom(routes, "Brusubi");
-const fineRoute1 = findRoutesFrom(routes, "Serekunda");
-const fineRoute2 = findRoutesFrom(routes, "Westfield");
+// const fineRoute1 = findRoutesFrom(routes, "Serekunda");
+// const fineRoute2 = findRoutesFrom(routes, "Westfield");
 console.log(fineRoute);
-console.log(fineRoute1);
-console.log(fineRoute2);
+// console.log(fineRoute1);
+// console.log(fineRoute2);
 
 
 console.log("===========================level 2 find path===================================");
@@ -199,7 +212,7 @@ console.log(calTime);
 console.log("===========================calculating transfers===================================");
 
 function calculateTransfers(trip){
- let transfer = trip.length
+ let transfer = trip.length;
  transfer = transfer - 1;
  return transfer;
 }
@@ -207,3 +220,32 @@ function calculateTransfers(trip){
 const tripTrans = findPath(routes, "Brusubi", "Banjul");
 const tripCal = calculateTransfers(tripTrans);
 console.log(tripCal);
+
+console.log("===========================finding all path route===================================");
+
+
+function findAllPaths(routes, currentLocation, destination, pathSoFar) {
+  if (currentLocation === destination) {
+    return [pathSoFar];
+  }
+
+  const legs = findRoutesFrom(routes, currentLocation);
+  let allPaths = [];
+
+  for (let i = 0; i < legs.length; i++) {
+    const leg = legs[i];
+    //.concat() takes an existing array and a new item, and returns a brand new array that's the combination of both 
+    //it doesn't change the original.
+    const newPathSoFar = pathSoFar.concat([leg]); //it's everything traveled so far, PLUS this new leg added onto the end.
+    const pathsFromHere = findAllPaths(routes, leg.to, destination, newPathSoFar);
+    allPaths = allPaths.concat(pathsFromHere);
+  }
+
+  return allPaths;
+}
+
+const allPaths = findAllPaths(routes, "Brusubi", "Banjul", []);
+console.log(allPaths);
+console.log(allPaths.length);
+
+
