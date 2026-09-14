@@ -246,6 +246,39 @@ function findAllPaths(routes, currentLocation, destination, pathSoFar) {
 
 const allPaths = findAllPaths(routes, "Brusubi", "Banjul", []);
 console.log(allPaths);
-console.log(allPaths.length);
+console.log(allPaths.length); // 2 complete path direct route and the 3-leg
 
+// .sort() converts everything to text and compares it character-by-character
+// const numbers = [85, 20, 100, 5];
+// numbers.sort();
+// console.log(numbers);
 
+// To fix it, .sort() accepts an optional comparison function — a small function you write yourself that tells it exactly how to compare two items.
+// const numbers = [85, 20, 100, 5];
+// numbers.sort((a, b) => a - b);
+// console.log(numbers);
+
+console.log("=========================== rank route===================================");
+
+function rankRoutes(paths, criteria){
+  const sorted = paths.slice();
+  sorted.sort((a, b) => {
+  if(criteria === "fare"){
+  return calculateFare(a) - calculateFare(b);
+  }else if(criteria === "time"){
+  return calculateTravelTime(a) - calculateTravelTime(b);
+  }else if(criteria === "transfers"){
+  return calculateTransfers(a) - calculateTransfers(b);
+  }
+  })
+  return sorted;
+}
+
+const cheapest = rankRoutes(allPaths, "fare");
+console.log(cheapest.map(trip => calculateFare(trip)));
+
+const fastest = rankRoutes(allPaths, "time");
+console.log(fastest.map(trip => calculateFare(trip)));
+
+const fewestTransfer = rankRoutes(allPaths, "transfers");
+console.log(fewestTransfer.map(trip => calculateTransfers(trip)));
