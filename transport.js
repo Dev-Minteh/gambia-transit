@@ -282,3 +282,15 @@ console.log(fastest.map(trip => calculateFare(trip)));
 
 const fewestTransfer = rankRoutes(allPaths, "transfers");
 console.log(fewestTransfer.map(trip => calculateTransfers(trip)));
+
+console.log("===========================recommend route===================================");
+
+function recommendRoute(paths, criteria){
+  const ranked = rankRoutes(paths, criteria);
+  return ranked[0];
+}
+
+
+const best = recommendRoute(allPaths, "fare");
+console.log(best);
+console.log(calculateFare(best));
