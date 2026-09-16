@@ -8,6 +8,12 @@ const fromValue = fromInput.value;
 const toValue = toInput.value;
 const allPaths = findAllPaths(routes, fromValue, toValue, []);
 const bestTrip = recommendRoute(allPaths, "fare");
+
+if(bestTrip === undefined){
+    results.innerHTML = "<p>No route was found between these locations</p>";
+    return;
+}
+
 let html = "";
 for(let i = 0; i < best.length; i++){
     html += `<p>
