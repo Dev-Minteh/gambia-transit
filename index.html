@@ -12,8 +12,12 @@
 
     <input type="text" id="fromInput" placeholder="From">
     <input type="text" id="toInput" placeholder="To">
+    <select id="criteriaSelect">
+    <option value="fare">Cheapest</option>
+    <option value="time">Fastest</option>
+    <option value="transfer">Fewest Transfer</option>
+    </select>
     <button id="searchButton">Search</button>
-
     <div id="results"></div>
 <script src="transport.js"></script>
 <script src="app.js"></script>

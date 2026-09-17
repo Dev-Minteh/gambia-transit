@@ -2,7 +2,7 @@ const button = document.getElementById("searchButton");
 const fromInput = document.getElementById("fromInput");
 const toInput = document.getElementById("toInput");
 const results = document.getElementById("results");
-
+const criteriaSelect = document.getElementById("criteriaSelect");
 const savedFrom = localStorage.getItem("lastFrom");
 const SavedTo = localStorage.getItem("lastTo");
 if(savedFrom){
@@ -20,7 +20,7 @@ localStorage.setItem("lastFrom", fromValue);
 localStorage.setItem("lastTo", toValue);
 
 const allPaths = findAllPaths(routes, fromValue, toValue, []);
-const bestTrip = recommendRoute(allPaths, "fare");
+const bestTrip = recommendRoute(allPaths, criteriaSelect.value);
 
 if(bestTrip === undefined){
     results.innerHTML = "<p>No route was found between these locations</p>";

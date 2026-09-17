@@ -10,7 +10,7 @@ travelTime: 25 ,
 const route2 = {
   from: "Serekunda",
   to: "Westfield",
-  vehicle: "six passenger van",
+  vehicle: "mini van",
   fare: 20,
   currency: "GMD",
   travelTime: 10
